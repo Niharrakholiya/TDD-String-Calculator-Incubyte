@@ -18,4 +18,9 @@ public class StringCalculatorTest {
         assertEquals(7, StringCalculator.add("7"));
         assertEquals(40, StringCalculator.add("40"));
     }
+
+    @Test
+    void twoNumbersCommaDelimited() {
+        assertEquals(3, StringCalculator.add("1,2"));
+    }
 }
