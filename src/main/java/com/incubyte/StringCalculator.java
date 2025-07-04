@@ -10,11 +10,15 @@ public class StringCalculator {
             if (!input.contains(",") && !input.contains("\n")) {
                 return Integer.parseInt(input);
             }
-            else if (input.contains(",")) {
-                String[] nums = input.split(",");
-                return Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
-            }
+            String[] tokens = input.split(",");
 
-            return 0;
+            int sum = 0;
+            for (String t : tokens) {
+                if (!t.isEmpty()) {
+                    sum += Integer.parseInt(t);
+                }
+            }
+            return sum;
+
         }
 }
