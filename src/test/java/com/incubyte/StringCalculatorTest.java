@@ -8,4 +8,13 @@ public class StringCalculatorTest {
         assertEquals(0, StringCalculator.add(""));
     }
 
+    @Test
+   void nullReturnsZero() {
+        assertEquals(0, StringCalculator.add(null));
+    }
+
+    @Test
+    void singleNumberReturnsValue() {
+        assertEquals(7, StringCalculator.add("7"));
+    }
 }
