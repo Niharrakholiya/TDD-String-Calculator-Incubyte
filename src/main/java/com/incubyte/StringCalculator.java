@@ -1,7 +1,8 @@
 package com.incubyte;
 
-public class StringCalculator {
-    public static void main(String[] args) {
 
-    }
+public class StringCalculator {
+        public static int add(String input) {
+            return 0;
+        }
 }
