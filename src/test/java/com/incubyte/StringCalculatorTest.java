@@ -29,4 +29,10 @@ public class StringCalculatorTest {
         assertEquals(6, StringCalculator.add("1\n2,3"));
     }
 
+    @Test
+    void negativeNumberThrows() {
+        assertThrows(IllegalArgumentException.class,
+                () -> StringCalculator.add("1,-2,3"));
+    }
+
 }
