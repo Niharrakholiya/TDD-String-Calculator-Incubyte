@@ -10,6 +10,11 @@ public class StringCalculator {
             if (!input.contains(",") && !input.contains("\n")) {
                 return Integer.parseInt(input);
             }
+            else if (input.contains(",")) {
+                String[] nums = input.split(",");
+                return Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
+            }
+
             return 0;
         }
 }
