@@ -23,4 +23,10 @@ public class StringCalculatorTest {
     void twoNumbersCommaDelimited() {
         assertEquals(3, StringCalculator.add("1,2"));
     }
+
+    @Test
+    void newlinesAndCommas() {
+        assertEquals(6, StringCalculator.add("1\n2,3"));
+    }
+
 }
