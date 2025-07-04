@@ -16,5 +16,6 @@ public class StringCalculatorTest {
     @Test
     void singleNumberReturnsValue() {
         assertEquals(7, StringCalculator.add("7"));
+        assertEquals(40, StringCalculator.add("40"));
     }
 }

@@ -7,6 +7,9 @@ public class StringCalculator {
         public static int add(String input) {
             if(input == null || input.isEmpty()) return 0;
 
-            return parseInt(input);
+            if (!input.contains(",") && !input.contains("\n")) {
+                return Integer.parseInt(input);
+            }
+            return 0;
         }
 }
