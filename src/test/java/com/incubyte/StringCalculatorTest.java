@@ -49,5 +49,10 @@ public class StringCalculatorTest {
         assertEquals(3, StringCalculator.add("//;\n1;2"));
     }
 
+    @Test
+    void customMultiCharDelimiter() {
+        assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
+    }
+
 
 }
