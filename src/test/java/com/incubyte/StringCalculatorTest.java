@@ -44,4 +44,10 @@ public class StringCalculatorTest {
         assertTrue(exception.getMessage().contains("-3"));
     }
 
+    @Test
+    void customSingleCharDelimiter() {
+        assertEquals(3, StringCalculator.add("//;\n1;2"));
+    }
+
+
 }
