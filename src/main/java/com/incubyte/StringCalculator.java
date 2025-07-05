@@ -2,6 +2,7 @@ package com.incubyte;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.Integer.parseInt;
@@ -18,19 +19,24 @@ public class StringCalculator {
     }
 
     private static String getDelimiter(String input) {
-        if (input.startsWith("//")) {
-            int delimiterEnd = input.indexOf("\n");
-            String delimiterSection = input.substring(2, delimiterEnd);
+        if (!input.startsWith("//")) return ",|\n";
 
-            // Case: multi-char delimiter like //[***]
-            if (delimiterSection.startsWith("[") && delimiterSection.endsWith("]")) {
-                return Pattern.quote(delimiterSection.substring(1, delimiterSection.length() - 1));
-            }
+        int delimiterEnd = input.indexOf("\n");
+        String delimiterSection = input.substring(2, delimiterEnd);
 
-            // Case: single-char delimiter
-            return Pattern.quote(delimiterSection);
+        List<String> delimiters = new ArrayList<>();
+        Matcher matcher = Pattern.compile("\\[(.*?)]").matcher(delimiterSection);
+
+        while (matcher.find()) {
+            delimiters.add(Pattern.quote(matcher.group(1)));
         }
-        return ",|\n";
+
+        // If no square brackets found, treat whole section as single delimiter
+        if (delimiters.isEmpty()) {
+            delimiters.add(Pattern.quote(delimiterSection));
+        }
+
+        return String.join("|", delimiters);
     }
 
     private static String[] splitInput(String input, String delimiter) {
