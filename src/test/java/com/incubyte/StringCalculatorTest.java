@@ -54,5 +54,10 @@ public class StringCalculatorTest {
         assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
     }
 
+    @Test
+    void numbersGreaterThan1000AreIgnored() {
+        assertEquals(2, StringCalculator.add("2,1001"));
+        assertEquals(1002, StringCalculator.add("2,1000"));
+    }
 
 }
