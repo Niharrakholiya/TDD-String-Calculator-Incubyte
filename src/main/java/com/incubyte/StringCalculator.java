@@ -33,17 +33,21 @@ public class StringCalculator {
         return ",|\n";
     }
 
+    private static String[] splitInput(String input, String delimiter) {
+        if (input.startsWith("//")) {
+            input = input.substring(input.indexOf("\n") + 1);
+        }
+        return input.split(delimiter);
+    }
+
 
 
     public static int add(String input) {
         if (input == null || input.isEmpty()) return 0;
 
         String delimiter = getDelimiter(input);
-        if (input.startsWith("//")) {
-            input = input.substring(input.indexOf("\n") + 1);
-        }
+        String[] tokens= splitInput(input, delimiter);
 
-        String[] tokens = input.split(delimiter);
         List<Integer> negatives = new ArrayList<>();
         int sum = 0;
 
