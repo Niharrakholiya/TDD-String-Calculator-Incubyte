@@ -60,4 +60,10 @@ public class StringCalculatorTest {
         assertEquals(1002, StringCalculator.add("2,1000"));
     }
 
+    @Test
+    void multipleSingleCharDelimiters() {
+        assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
+    }
+
+
 }
