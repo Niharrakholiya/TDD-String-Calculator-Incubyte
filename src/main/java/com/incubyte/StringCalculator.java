@@ -39,7 +39,33 @@ public class StringCalculator {
         }
         return input.split(delimiter);
     }
+    private static int parseAndSum(String[] tokens) {
+        List<Integer> negatives = new ArrayList<>();
+        int sum = 0;
 
+        for (String token : tokens) {
+            Integer number = parseToken(token);
+            if (number == null) continue;
+
+            if (number < 0) {
+                negatives.add(number);
+            } else if (number <= 1000) {
+                sum += number;
+            }
+        }
+
+        checkNegatives(negatives);
+        return sum;
+    }
+
+    private static Integer parseToken(String token) {
+        if (token == null || token.isEmpty()) return null;
+        try {
+            return parseInt(token.trim());
+        } catch (NumberFormatException e) {
+            return null; // safely ignore malformed tokens if any
+        }
+    }
 
 
 
@@ -50,17 +76,7 @@ public class StringCalculator {
         String[] tokens= splitInput(input, delimiter);
 
         List<Integer> negatives = new ArrayList<>();
-        int sum = 0;
-
-        for (String token : tokens) {
-            int number = parseInt(token);
-            if (number < 0) {
-                negatives.add(number);
-            }
-            else if (number <= 1000) {
-                sum += number;
-            }
-        }
+        int sum = parseAndSum(tokens);
 
         checkNegatives(negatives);
 
