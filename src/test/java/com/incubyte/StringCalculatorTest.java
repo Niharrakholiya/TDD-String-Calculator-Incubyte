@@ -35,4 +35,13 @@ public class StringCalculatorTest {
                 () -> StringCalculator.add("1,-2,3"));
     }
 
+    @Test
+    void multipleNegativesThrowsExceptionWithAllNegativesListed() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> StringCalculator.add("-1,2,-3"));
+
+        assertTrue(exception.getMessage().contains("-1"));
+        assertTrue(exception.getMessage().contains("-3"));
+    }
+
 }
