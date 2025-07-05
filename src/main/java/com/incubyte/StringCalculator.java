@@ -8,6 +8,14 @@ import static java.lang.Integer.parseInt;
 
 public class StringCalculator {
 
+    private static void checkNegatives(List<Integer> negatives) {
+        if (!negatives.isEmpty()) {
+            String message = "negatives not allowed: " + String.join(", ",
+                    negatives.stream().map(String::valueOf).toList());
+            throw new IllegalArgumentException(message);
+        }
+    }
+
     public static int add(String input) {
         if (input == null || input.isEmpty()) return 0;
 
@@ -23,9 +31,7 @@ public class StringCalculator {
             sum += number;
         }
 
-        if (!negatives.isEmpty()) {
-            throw new IllegalArgumentException("negatives not allowed: " + negatives.get(0));
-        }
+        checkNegatives(negatives);
 
         return sum;
     }
