@@ -18,12 +18,7 @@ public class StringCalculator {
         }
     }
 
-    private static String getDelimiter(String input) {
-        if (!input.startsWith("//")) return ",|\n";
-
-        int delimiterEnd = input.indexOf("\n");
-        String delimiterSection = input.substring(2, delimiterEnd);
-
+    private static List<String> parseDelimiters(String delimiterSection) {
         List<String> delimiters = new ArrayList<>();
         Matcher matcher = Pattern.compile("\\[(.*?)]").matcher(delimiterSection);
 
@@ -31,13 +26,20 @@ public class StringCalculator {
             delimiters.add(Pattern.quote(matcher.group(1)));
         }
 
-        // If no square brackets found, treat whole section as single delimiter
         if (delimiters.isEmpty()) {
             delimiters.add(Pattern.quote(delimiterSection));
         }
 
-        return String.join("|", delimiters);
+        return delimiters;
     }
+    private static String getDelimiter(String input) {
+        if (!input.startsWith("//")) return ",|\n";
+
+        int delimiterEnd = input.indexOf("\n");
+        String delimiterSection = input.substring(2, delimiterEnd);
+        return String.join("|", parseDelimiters(delimiterSection));
+    }
+
 
     private static String[] splitInput(String input, String delimiter) {
         if (input.startsWith("//")) {
