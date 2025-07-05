@@ -19,12 +19,20 @@ public class StringCalculator {
 
     private static String getDelimiter(String input) {
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            String rawDelimiter = input.substring(2, delimiterIndex);
-            return Pattern.quote(rawDelimiter);
+            int delimiterEnd = input.indexOf("\n");
+            String delimiterSection = input.substring(2, delimiterEnd);
+
+            // Case: multi-char delimiter like //[***]
+            if (delimiterSection.startsWith("[") && delimiterSection.endsWith("]")) {
+                return Pattern.quote(delimiterSection.substring(1, delimiterSection.length() - 1));
+            }
+
+            // Case: single-char delimiter
+            return Pattern.quote(delimiterSection);
         }
         return ",|\n";
     }
+
 
 
     public static int add(String input) {
