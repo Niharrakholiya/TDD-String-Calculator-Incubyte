@@ -65,5 +65,21 @@ public class StringCalculatorTest {
         assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
     }
 
+    @Test
+    void multipleMultiCharDelimiters() {
+        assertEquals(9, StringCalculator.add("//[***][%%%]\n1***2%%%3***3"));
+    }
+
+    @Test
+    void delimiterWithSpecialCharacters() {
+        assertEquals(6, StringCalculator.add("//[$^][123]\n1$^2" + "123" + "3"));
+    }
+
+    @Test
+    void nonNumericTokensShouldBeIgnored() {
+        assertEquals(4, StringCalculator.add("1,X,3"));
+    }
+
+
 
 }
